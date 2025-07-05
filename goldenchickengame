@@ -1,0 +1,122 @@
+// GoldenChicken Game (Basic Frontend Only - React + TailwindCSS)
+// Features: 10 Coop Slots, View Chicken Info, Simple Store Icon
+
+import { useState, useEffect } from "react";
+import { Card } from "@/components/ui/card";
+import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Egg, Store } from "lucide-react";
+
+const initialCoops = Array.from({ length: 10 }, (_, i) => ({
+  id: i + 1,
+  hasChicken: i === 0, // Tặng 1 gà đầu tiên
+  chicken: i === 0
+    ? {
+        type: "Gà Công Nghiệp",
+        growth: 0,
+        eggTimer: 0,
+        health: 100,
+        stage: "trưởng thành"
+      }
+    : null,
+}));
+
+export default function GoldenChickenFarm() {
+  const [coops, setCoops] = useState(initialCoops);
+  const [selectedChicken, setSelectedChicken] = useState(null);
+  const [showStore, setShowStore] = useState(false);
+
+  // Time update (1s interval for demo purposes)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCoops(prev => prev.map(slot => {
+        if (!slot.hasChicken || !slot.chicken) return slot;
+        let { growth, eggTimer, health, stage } = slot.chicken;
+
+        if (health <= 0) return slot;
+
+        if (stage === "gà con") {
+          growth += 1 / 3600; // 1s = 1/3600 hour (demo)
+          if (growth >= 168) stage = "trưởng thành";
+        } else {
+          eggTimer += 1 / 3600;
+        }
+
+        return {
+          ...slot,
+          chicken: {
+            ...slot.chicken,
+            growth,
+            eggTimer,
+            stage
+          }
+        };
+      }));
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-[url('/farm-bg.jpg')] bg-cover p-4">
+      <div className="flex justify-end mb-4">
+        <Button onClick={() => setShowStore(!showStore)} variant="outline">
+          <Store className="mr-2 h-4 w-4" /> Cửa hàng
+        </Button>
+      </div>
+
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+        {coops.map((coop, index) => (
+          <Card
+            key={index}
+            className="p-2 hover:cursor-pointer hover:scale-105 transition-all"
+            onClick={() => coop.hasChicken && setSelectedChicken(coop.chicken)}
+          >
+            <div className="text-center">
+              <div className="text-sm font-semibold">Ổ {coop.id}</div>
+              {coop.hasChicken ? (
+                <img
+                  src="/chicken.png"
+                  alt="chicken"
+                  className="mx-auto h-16"
+                />
+              ) : (
+                <div className="text-xs text-gray-400">Trống</div>
+              )}
+            </div>
+          </Card>
+        ))}
+      </div>
+
+      <Dialog open={!!selectedChicken} onOpenChange={() => setSelectedChicken(null)}>
+        <DialogContent>
+          {selectedChicken && (
+            <div>
+              <h2 className="text-lg font-bold mb-2">Thông tin gà</h2>
+              <p>Loại: {selectedChicken.type}</p>
+              <p>Giai đoạn: {selectedChicken.stage}</p>
+              {selectedChicken.stage === "gà con" && (
+                <p>Trưởng thành sau: {Math.max(0, 168 - selectedChicken.growth).toFixed(2)} giờ</p>
+              )}
+              {selectedChicken.stage === "trưởng thành" && (
+                <p>Đẻ trứng sau: {Math.max(0, 24 - selectedChicken.eggTimer).toFixed(2)} giờ</p>
+              )}
+              <p>Sức khỏe: {selectedChicken.health.toFixed(0)} / 100</p>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {showStore && (
+        <div className="fixed top-16 right-4 bg-white p-4 rounded-xl shadow-xl z-50 w-60">
+          <h3 className="text-lg font-bold mb-2">Cửa hàng</h3>
+          <ul className="text-sm space-y-1">
+            <li>- Mua gà</li>
+            <li>- Mua thức ăn</li>
+            <li>- Mua thuốc</li>
+            <li>- Thanh lý gà mái thải</li>
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
