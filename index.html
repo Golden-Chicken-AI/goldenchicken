@@ -1,24 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Golden Chicken</title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <title>Golden Chicken Farm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #fff8dc; }
+        h1 { text-align: center; }
+        .section { margin-bottom: 30px; }
+        button { padding: 10px; margin: 5px; }
+    </style>
 </head>
 <body>
-  <h1>🐔 Golden Chicken Farm</h1>
-  <div id="chicken-status"></div>
-  <div>
-    <button onclick="feedChicken()">🍚 Cho ăn</button>
-    <button onclick="collectEgg()">🥚 Thu trứng</button>
-  </div>
-  <div id="shop">
-    <h2>🛒 Cửa hàng</h2>
-    <button onclick="buyItem('thuong')">Mua Thức ăn thường</button>
-    <button onclick="buyItem('tangtoc6')">Mua Thức ăn tăng tốc 6h</button>
-  </div>
-  <script src="js/data.js"></script>
-  <script src="js/script.js"></script>
+    <h1>🐔 Golden Chicken Farm</h1>
+    <div class="section">
+        <h2>Thông tin Gà</h2>
+        <p><strong>Loại:</strong> <span id="chickenType">Gà Công nghiệp</span></p>
+        <p><strong>Sức khỏe:</strong> <span id="health">100</span></p>
+        <p><strong>Trứng đã đẻ:</strong> <span id="eggsLaid">0</span></p>
+        <p><strong>Thời gian còn lại để đẻ:</strong> <span id="eggTimer">--</span></p>
+    </div>
+    <div class="section">
+        <h2>Hành động</h2>
+        <button onclick="feedChicken()">🍚 Cho ăn</button>
+        <button onclick="collectEgg()">🥚 Thu hoạch trứng</button>
+        <button onclick="useMedicine()">💊 Dùng thuốc</button>
+    </div>
+    <div class="section">
+        <h2>Cửa hàng</h2>
+        <button onclick="buyItem('food')">🍗 Mua thức ăn (1 PI)</button>
+        <button onclick="buyItem('medicine')">💉 Mua thuốc (3 PI)</button>
+    </div>
+    <div class="section">
+        <h2>Kho đồ</h2>
+        <p>Thức ăn: <span id="foodQty">5</span></p>
+        <p>Thuốc: <span id="medQty">1</span></p>
+        <p>Pi: <span id="piBalance">100</span></p>
+        <p>Trứng: <span id="eggsOwned">0</span></p>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
