@@ -1,25 +1,43 @@
 
-const chickens = Array.from({ length: 10 }).map((_, i) => ({
-  id: i,
-  growTime: Math.floor(Math.random() * 500),  // minutes
-  layTime: Math.floor(Math.random() * 1440),  // minutes
-  health: 100 - Math.floor(Math.random() * 40)
+const coopsEl = document.getElementById("coops");
+const modal = document.getElementById("chicken-info-modal");
+const details = document.getElementById("chicken-details");
+
+const chickens = Array(10).fill().map((_, i) => ({
+  id: i + 1,
+  matureIn: Math.floor(Math.random() * 500),
+  layIn: 1440,
+  health: 100,
 }));
 
-function showChickenInfo(index) {
-  const chicken = chickens[index];
-  document.getElementById('chicken-id').textContent = index + 1;
-  document.getElementById('grow-time').textContent = chicken.growTime + " phút";
-  document.getElementById('lay-time').textContent = chicken.layTime + " phút";
-  document.getElementById('health').textContent = chicken.health;
-  document.getElementById('chicken-info').classList.remove('hidden');
+function renderCoops() {
+  coopsEl.innerHTML = "";
+  chickens.forEach(chicken => {
+    const coop = document.createElement("div");
+    coop.className = "coop";
+    coop.innerHTML = `🐔<br/>Ổ #${chicken.id}`;
+    coop.onclick = () => showInfo(chicken);
+    coopsEl.appendChild(coop);
+  });
 }
 
-function closePopup() {
-  document.getElementById('chicken-info').classList.add('hidden');
+function showInfo(chicken) {
+  details.innerHTML = `
+    🐔 Gà #${chicken.id}<br/>
+    🕑 Còn ${chicken.matureIn} phút để trưởng thành<br/>
+    🥚 Còn ${chicken.layIn} phút để đẻ trứng<br/>
+    ❤️ Sức khỏe: ${chicken.health}/100
+  `;
+  modal.classList.remove("hidden");
+}
+
+function closeModal() {
+  modal.classList.add("hidden");
 }
 
 function toggleShop() {
-  const shop = document.getElementById('shop');
-  shop.classList.toggle('hidden');
+  const shop = document.getElementById("shop");
+  shop.classList.toggle("hidden");
 }
+
+renderCoops();
