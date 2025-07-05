@@ -1,0 +1,80 @@
+
+import React, { useEffect, useState } from "react";
+import { FaStore, FaTrophy, FaTasks, FaBoxOpen, FaGift, FaChicken } from "react-icons/fa";
+
+const Farm = () => {
+  const [chickens, setChickens] = useState(3); // Số gà mặc định
+  const [positions, setPositions] = useState([]);
+
+  // Tạo vị trí ngẫu nhiên cho gà
+  useEffect(() => {
+    const newPositions = Array.from({ length: chickens }, () => ({
+      left: Math.random() * 80 + 10,
+      top: Math.random() * 60 + 30,
+    }));
+    setPositions(newPositions);
+  }, [chickens]);
+
+  return (
+    <div
+      className="relative w-full h-screen bg-cover bg-center"
+      style={{ backgroundImage: "url('/farm-background.jpg')" }} // Thay bằng ảnh nền trang trại bạn có
+    >
+      {/* Gà di chuyển (giả lập bằng vị trí random ban đầu) */}
+      {positions.map((pos, idx) => (
+        <div
+          key={idx}
+          className="absolute transition-all duration-1000"
+          style={{ left: `${pos.left}%`, top: `${pos.top}%` }}
+        >
+          <FaChicken className="text-yellow-500 text-4xl animate-bounce" />
+        </div>
+      ))}
+
+      {/* Icon chức năng */}
+      <div className="absolute top-4 left-4 space-y-4">
+        <button
+          onClick={() => alert(`Bạn đang nuôi ${chickens} con gà.`)}
+          className="bg-white rounded-full p-3 shadow-lg hover:bg-yellow-100"
+        >
+          <FaChicken />
+        </button>
+        <button
+          onClick={() => alert("Nhiệm vụ hàng ngày")}
+          className="bg-white rounded-full p-3 shadow-lg hover:bg-blue-100"
+        >
+          <FaTasks />
+        </button>
+        <button
+          onClick={() => alert("Vòng quay 7 ngày")}
+          className="bg-white rounded-full p-3 shadow-lg hover:bg-purple-100"
+        >
+          <FaGift />
+        </button>
+      </div>
+
+      <div className="absolute top-4 right-4 space-y-4">
+        <button
+          onClick={() => alert("Bảng xếp hạng")}
+          className="bg-white rounded-full p-3 shadow-lg hover:bg-green-100"
+        >
+          <FaTrophy />
+        </button>
+        <button
+          onClick={() => alert("Cửa hàng")}
+          className="bg-white rounded-full p-3 shadow-lg hover:bg-pink-100"
+        >
+          <FaStore />
+        </button>
+        <button
+          onClick={() => alert("Kho đồ")}
+          className="bg-white rounded-full p-3 shadow-lg hover:bg-gray-100"
+        >
+          <FaBoxOpen />
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default Farm;
