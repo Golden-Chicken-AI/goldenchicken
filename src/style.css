@@ -1,0 +1,70 @@
+
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: url('/public/background.jpg') no-repeat center center;
+  background-size: cover;
+}
+
+#root {
+  padding: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+}
+
+.chicken {
+  background: #fff4;
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  border: 2px solid #fff;
+  backdrop-filter: blur(4px);
+}
+
+.shop {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: #ffffffcc;
+  padding: 1rem;
+  border-radius: 10px;
+  max-width: 300px;
+  z-index: 999;
+}
+
+.shop-item {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  background: #eee;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  background: #fff4;
+  padding: 1rem;
+  border-radius: 10px;
+  backdrop-filter: blur(4px);
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: #ff9800;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #f57c00;
+}
