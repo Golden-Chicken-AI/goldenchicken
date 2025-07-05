@@ -1,33 +1,49 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Golden Chicken Farm</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="farm-container">
-    <h1>Golden Chicken Farm</h1>
-    <div id="coop-container"></div>
+  <div class="farm-background">
+    <header>
+      <h1>Golden Chicken Farm</h1>
+      <div id="store-icon">🛒</div>
+    </header>
 
-    <button id="store-button">🛒 Cửa hàng</button>
+    <main>
+      <section class="coop-container">
+        <!-- 10 ổ gà tầng 1 -->
+        <div class="coop-grid">
+          <!-- Các ổ gà sẽ được thêm bằng JavaScript -->
+        </div>
+      </section>
 
-    <div id="store-popup" class="hidden">
-      <h2>Cửa hàng</h2>
-      <div id="store-items"></div>
-      <button onclick="closeStore()">Đóng</button>
-    </div>
+      <aside class="info-panel">
+        <h2>Thông tin gà</h2>
+        <p><strong>ID:</strong> <span id="chicken-id">--</span></p>
+        <p><strong>Trạng thái:</strong> <span id="chicken-status">--</span></p>
+        <p><strong>Sức khỏe:</strong> <span id="chicken-health">--</span></p>
+        <p><strong>Thời gian trưởng thành:</strong> <span id="chicken-grow">--</span></p>
+        <p><strong>Thời gian đẻ trứng:</strong> <span id="chicken-egg">--</span></p>
+      </aside>
 
-    <div id="chicken-info" class="hidden">
-      <h3>Thông tin Gà</h3>
-      <p id="chicken-status"></p>
-      <button onclick="closeChickenInfo()">Đóng</button>
-    </div>
+      <div id="store-panel" class="hidden">
+        <h2>Cửa hàng</h2>
+        <ul>
+          <li>Thức ăn thường</li>
+          <li>Thức ăn tăng trưởng -6h</li>
+          <li>Thức ăn tăng trưởng -12h</li>
+          <li>Thức ăn giảm thời gian đẻ -4h</li>
+          <li>Thuốc hồi sức +50</li>
+        </ul>
+      </div>
+    </main>
   </div>
 
-  <script src="data.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
