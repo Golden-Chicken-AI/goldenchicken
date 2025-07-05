@@ -1,48 +1,43 @@
-
-let chicken = {
-  lastFed: null,
-  nextEggTime: null,
+let chicken = JSON.parse(localStorage.getItem("myChicken")) || {
+  type: "ga_thuong",
+  health: 100,
+  lastFed: Date.now(),
+  lastLaid: Date.now(),
+  eggs: 0
 };
 
-function updateStatus() {
-  const status = document.getElementById("status");
-  const now = new Date();
-  let msg = "";
-
-  if (chicken.lastFed) {
-    const fedTime = new Date(chicken.lastFed);
-    msg += "Lần cho ăn gần nhất: " + fedTime.toLocaleString() + "<br/>";
-  } else {
-    msg += "Gà chưa được cho ăn lần nào.<br/>";
-  }
-
-  if (chicken.nextEggTime) {
-    const eggTime = new Date(chicken.nextEggTime);
-    if (eggTime > now) {
-      const diff = Math.floor((eggTime - now) / 1000 / 60);
-      msg += "Gà sẽ đẻ trứng sau: " + diff + " phút.";
-    } else {
-      msg += "Gà đã sẵn sàng đẻ trứng!";
-    }
-  }
-
-  status.innerHTML = msg;
+function updateUI() {
+  const el = document.getElementById("chicken-status");
+  const now = Date.now();
+  const hoursSinceFed = Math.floor((now - chicken.lastFed) / 3600000);
+  if (hoursSinceFed >= 36) chicken.health = Math.max(0, chicken.health - 1);
+  const hoursToLay = chickenTypes[chicken.type].layInterval - Math.floor((now - chicken.lastLaid) / 3600000);
+  el.innerHTML = `
+    <p>Tên gà: ${chickenTypes[chicken.type].name}</p>
+    <p>Sức khỏe: ${chicken.health}%</p>
+    <p>Trứng đã đẻ: ${chicken.eggs}</p>
+    <p>Thời gian còn lại để đẻ trứng: ${Math.max(0, hoursToLay)} giờ</p>
+  `;
+  localStorage.setItem("myChicken", JSON.stringify(chicken));
 }
-
 function feedChicken() {
-  const now = new Date();
-  chicken.lastFed = now.toISOString();
-  chicken.nextEggTime = new Date(now.getTime() + 24 * 60 * 60 * 1000).toISOString();
-  localStorage.setItem("chicken", JSON.stringify(chicken));
-  updateStatus();
+  chicken.lastFed = Date.now();
+  chicken.health = 100;
+  updateUI();
 }
-
-function loadChicken() {
-  const data = localStorage.getItem("chicken");
-  if (data) {
-    chicken = JSON.parse(data);
+function collectEgg() {
+  const now = Date.now();
+  const hoursPassed = Math.floor((now - chicken.lastLaid) / 3600000);
+  if (hoursPassed >= chickenTypes[chicken.type].layInterval && chicken.health >= 100) {
+    chicken.eggs += 1;
+    chicken.lastLaid = now;
+    alert("🥚 Đã thu hoạch 1 trứng!");
+  } else {
+    alert("⏳ Chưa đến lúc thu hoạch hoặc gà chưa đủ sức khỏe!");
   }
-  updateStatus();
+  updateUI();
 }
-
-window.onload = loadChicken;
+function buyItem(item) {
+  alert(`Đã mua: ${foodItems[item].name} (mô phỏng)`);
+}
+updateUI();
