@@ -1,9 +1,64 @@
+
 body {
+  margin: 0;
   font-family: Arial, sans-serif;
-  text-align: center;
+  background: url('farm-background.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.farm {
   padding: 20px;
 }
-button {
-  margin: 5px;
+
+.coop-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.chicken-slot {
+  width: 100px;
+  height: 100px;
+  background-color: #fff8dcaa;
+  border: 2px solid #8b5e3c;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.chicken-slot img {
+  width: 60px;
+  height: 60px;
+}
+
+.shop-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 30px;
+  background: #fff;
   padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px #333;
+}
+
+.info-popup, .shop-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 20px;
+  z-index: 10;
+}
+
+.hidden {
+  display: none;
 }

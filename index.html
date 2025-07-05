@@ -1,43 +1,44 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Golden Chicken Farm</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body { font-family: Arial, sans-serif; padding: 20px; background-color: #fff8dc; }
-        h1 { text-align: center; }
-        .section { margin-bottom: 30px; }
-        button { padding: 10px; margin: 5px; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Golden Chicken Farm</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <h1>🐔 Golden Chicken Farm</h1>
-    <div class="section">
-        <h2>Thông tin Gà</h2>
-        <p><strong>Loại:</strong> <span id="chickenType">Gà Công nghiệp</span></p>
-        <p><strong>Sức khỏe:</strong> <span id="health">100</span></p>
-        <p><strong>Trứng đã đẻ:</strong> <span id="eggsLaid">0</span></p>
-        <p><strong>Thời gian còn lại để đẻ:</strong> <span id="eggTimer">--</span></p>
+  <div class="farm">
+    <div class="coop-grid">
+      <!-- 10 chicken slots -->
+      <div class="chicken-slot" onclick="showChickenInfo(0)"><img src="chicken.png" alt="Chicken" /></div>
+<div class="chicken-slot" onclick="showChickenInfo(1)"><img src="chicken.png" alt="Chicken" /></div>
+<div class="chicken-slot" onclick="showChickenInfo(2)"><img src="chicken.png" alt="Chicken" /></div>
+<div class="chicken-slot" onclick="showChickenInfo(3)"><img src="chicken.png" alt="Chicken" /></div>
+<div class="chicken-slot" onclick="showChickenInfo(4)"><img src="chicken.png" alt="Chicken" /></div>
+<div class="chicken-slot" onclick="showChickenInfo(5)"><img src="chicken.png" alt="Chicken" /></div>
+<div class="chicken-slot" onclick="showChickenInfo(6)"><img src="chicken.png" alt="Chicken" /></div>
+<div class="chicken-slot" onclick="showChickenInfo(7)"><img src="chicken.png" alt="Chicken" /></div>
+<div class="chicken-slot" onclick="showChickenInfo(8)"><img src="chicken.png" alt="Chicken" /></div>
+<div class="chicken-slot" onclick="showChickenInfo(9)"><img src="chicken.png" alt="Chicken" /></div>
     </div>
-    <div class="section">
-        <h2>Hành động</h2>
-        <button onclick="feedChicken()">🍚 Cho ăn</button>
-        <button onclick="collectEgg()">🥚 Thu hoạch trứng</button>
-        <button onclick="useMedicine()">💊 Dùng thuốc</button>
-    </div>
-    <div class="section">
-        <h2>Cửa hàng</h2>
-        <button onclick="buyItem('food')">🍗 Mua thức ăn (1 PI)</button>
-        <button onclick="buyItem('medicine')">💉 Mua thuốc (3 PI)</button>
-    </div>
-    <div class="section">
-        <h2>Kho đồ</h2>
-        <p>Thức ăn: <span id="foodQty">5</span></p>
-        <p>Thuốc: <span id="medQty">1</span></p>
-        <p>Pi: <span id="piBalance">100</span></p>
-        <p>Trứng: <span id="eggsOwned">0</span></p>
-    </div>
-    <script src="script.js"></script>
+    <div class="shop-icon" onclick="toggleShop()">🛒</div>
+  </div>
+
+  <div id="chicken-info" class="info-popup hidden">
+    <p><strong>Gà số: </strong><span id="chicken-id"></span></p>
+    <p>Trưởng thành trong: <span id="grow-time"></span></p>
+    <p>Đẻ trứng sau: <span id="lay-time"></span></p>
+    <p>Sức khỏe: <span id="health"></span>/100</p>
+    <button onclick="closePopup()">Đóng</button>
+  </div>
+
+  <div id="shop" class="shop-popup hidden">
+    <h3>Cửa hàng</h3>
+    <p>Ở đây sẽ là nơi mua thức ăn, thuốc, và bán trứng.</p>
+    <button onclick="toggleShop()">Đóng cửa hàng</button>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
