@@ -1,98 +1,96 @@
 
 body {
   margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background: url('https://i.imgur.com/N6bK9TD.png') no-repeat center center fixed;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: url('https://i.imgur.com/BdT1UXJ.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
-header {
-  background-color: #f0c36d;
-  padding: 10px;
+h1 {
   text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-  color: #5c3d00;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  margin-top: 1rem;
+  color: #fff;
+  text-shadow: 2px 2px #000;
 }
 
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 20px;
+.chicken-coop {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-.chicken-slot {
-  width: 100px;
-  height: 100px;
-  background-color: rgba(255, 255, 255, 0.8);
-  margin: 10px;
-  border-radius: 10px;
-  position: relative;
+.coop-slot {
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
   cursor: pointer;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
-  text-align: center;
-  padding-top: 10px;
+  position: relative;
 }
 
-.chicken-slot img {
-  width: 60px;
-  height: 60px;
+.coop-slot img {
+  width: 80px;
+  height: 80px;
 }
 
-.info-panel {
+#infoPanel {
   position: fixed;
-  bottom: 20px;
-  left: 20px;
-  width: 250px;
-  background-color: white;
-  border: 2px solid #555;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
   border-radius: 10px;
-  padding: 10px;
+  padding: 1rem;
+  width: 300px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   display: none;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  z-index: 1000;
 }
 
-.shop-icon {
+#infoPanel h2 {
+  margin-top: 0;
+  font-size: 1.2rem;
+}
+
+#infoPanel button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#shopIcon {
   position: fixed;
   top: 20px;
   right: 20px;
   width: 50px;
   height: 50px;
-  background: url('https://cdn-icons-png.flaticon.com/512/263/263142.png') no-repeat center center;
+  background: url('https://i.imgur.com/0Q9YFGd.png') no-repeat center center;
   background-size: contain;
   cursor: pointer;
+  z-index: 100;
 }
 
-.shop-panel {
-  position: fixed;
-  top: 80px;
-  right: 20px;
-  width: 300px;
-  background-color: white;
-  border: 2px solid #555;
-  border-radius: 10px;
-  padding: 15px;
+#shopMenu {
   display: none;
-  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  position: fixed;
+  right: 10px;
+  top: 80px;
+  background: white;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 250px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  z-index: 100;
 }
 
-.shop-item {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.shop-item button {
-  padding: 5px 10px;
-  background-color: #f0c36d;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.shop-item button:hover {
-  background-color: #e0b357;
+#shopMenu h3 {
+  margin-top: 0;
 }
