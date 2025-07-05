@@ -1,5 +1,6 @@
 
 import React from "react";
+import { hoursPassed, hoursRemaining } from "../utils/timeUtils";
 
 function ChickenCard({ data, onFeed, onCollect }) {
   const {
@@ -7,54 +8,32 @@ function ChickenCard({ data, onFeed, onCollect }) {
     type,
     health,
     eggs,
+    lastEgg,
+    lastFed,
     canLay,
   } = data;
 
-  const healthColor = health > 70 ? "bg-green-400" : health > 30 ? "bg-yellow-400" : "bg-red-400";
+  const fedAgo = hoursPassed(lastFed);
+  const nextEggIn = 24 - hoursPassed(lastEgg);
+
+  const getImage = () => {
+    switch (type) {
+      case "basic":
+        return "/chicken-basic.png";
+      case "vang":
+        return "/chicken-vang.png";
+      case "kimcuong":
+        return "/chicken-kimcuong.png";
+      default:
+        return "/chicken-basic.png";
+    }
+  };
 
   return (
-    <div className="bg-white p-4 rounded-2xl shadow-md border border-yellow-200 flex flex-col items-center">
-      <div className="text-xl font-semibold">{name}</div>
-      <div className="text-sm text-gray-500 mb-2">({type})</div>
+    <div className="bg-white shadow-lg rounded-2xl p-4 flex flex-col items-center">
+      <img src={getImage()} alt={name} className="w-24 h-24 mb-2" />
+      <h3 className="text-xl font-bold">{name}</h3>
+      <p className="text-sm text-gray-500 mb-1">Loại: {type}</p>
+      <p className={`text-sm ${health < 50 ? "text-red-500" : "text-green-600"}`}>
+        Sức
 
-      <img
-        src={`/chicken-${type}.png`}
-        alt="chicken"
-        className="w-24 h-24 object-contain mb-3"
-      />
-
-      <div className="w-full mb-2">
-        <div className="text-sm font-medium mb-1">Sức khỏe:</div>
-        <div className="w-full h-4 bg-gray-200 rounded-full">
-          <div
-            className={`h-full ${healthColor} rounded-full`}
-            style={{ width: `${health}%` }}
-          ></div>
-        </div>
-      </div>
-
-      <div className="text-sm mb-2">🥚 Trứng: {eggs}</div>
-
-      <div className="flex gap-2 mt-2">
-        <button
-          onClick={onFeed}
-          className="bg-yellow-300 hover:bg-yellow-400 px-3 py-1 rounded-full text-sm font-medium"
-        >
-          🍽️ Cho ăn
-        </button>
-
-        <button
-          onClick={onCollect}
-          disabled={!canLay}
-          className={`${
-            canLay ? "bg-blue-300 hover:bg-blue-400" : "bg-gray-300"
-          } px-3 py-1 rounded-full text-sm font-medium`}
-        >
-          🧺 Thu trứng
-        </button>
-      </div>
-    </div>
-  );
-}
-
-export default ChickenCard;
