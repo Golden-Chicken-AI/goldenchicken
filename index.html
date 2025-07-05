@@ -1,45 +1,33 @@
 
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Golden Chicken Farm</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Golden Chicken Farm - Tầng 1</h1>
-  <div class="coop-container">
-    <div class="coop" onclick="showInfo(1)">
-      <img src="https://i.imgur.com/RNw1U1M.png" class="chicken-img" />
-      Ổ 1
+  <div id="farm-container">
+    <h1>Golden Chicken Farm</h1>
+    <div id="coop-container"></div>
+
+    <button id="store-button">🛒 Cửa hàng</button>
+
+    <div id="store-popup" class="hidden">
+      <h2>Cửa hàng</h2>
+      <div id="store-items"></div>
+      <button onclick="closeStore()">Đóng</button>
     </div>
-    <div class="coop" onclick="showInfo(2)">
-      <img src="https://i.imgur.com/RNw1U1M.png" class="chicken-img" />
-      Ổ 2
+
+    <div id="chicken-info" class="hidden">
+      <h3>Thông tin Gà</h3>
+      <p id="chicken-status"></p>
+      <button onclick="closeChickenInfo()">Đóng</button>
     </div>
-    <div class="coop" onclick="showInfo(3)">Ổ 3</div>
-    <div class="coop" onclick="showInfo(4)">Ổ 4</div>
-    <div class="coop" onclick="showInfo(5)">Ổ 5</div>
-    <div class="coop" onclick="showInfo(6)">Ổ 6</div>
-    <div class="coop" onclick="showInfo(7)">Ổ 7</div>
-    <div class="coop" onclick="showInfo(8)">Ổ 8</div>
-    <div class="coop" onclick="showInfo(9)">Ổ 9</div>
-    <div class="coop" onclick="showInfo(10)">Ổ 10</div>
   </div>
 
-  <div id="infoBox" class="info-box hidden"></div>
-
+  <script src="data.js"></script>
   <script src="script.js"></script>
 </body>
-  <button class="shop-button" onclick="toggleShop()">🛒 Cửa hàng</button>
-
-<div id="shopPopup" class="shop-popup hidden">
-  <h3>🛒 Cửa hàng</h3>
-  <ul>
-    <li>🥕 Thức ăn thường - 1 Pi</li>
-    <li>⏳ Thức ăn tăng trưởng -6h - 3 Pi</li>
-    <li>💊 Thuốc hồi 50 HP - 2 Pi</li>
-  </ul>
-  <button onclick="toggleShop()">Đóng</button>
-</div>
 </html>
