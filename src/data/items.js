@@ -1,4 +1,5 @@
 
+js
 export const chickens = Array.from({ length: 10 }).map((_, i) => ({
   id: i + 1,
   type: 'gà công nghiệp',
