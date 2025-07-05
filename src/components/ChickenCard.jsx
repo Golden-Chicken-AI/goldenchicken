@@ -35,5 +35,41 @@ function ChickenCard({ data, onFeed, onCollect }) {
       <h3 className="text-xl font-bold">{name}</h3>
       <p className="text-sm text-gray-500 mb-1">Loại: {type}</p>
       <p className={`text-sm ${health < 50 ? "text-red-500" : "text-green-600"}`}>
-        Sức
+        Sức khỏe: {health}%
+      </p>
+      <p className="text-sm">Trứng: {eggs}</p>
+      <p className="text-sm">Cho ăn: {fedAgo} giờ trước</p>
+
+      {canLay ? (
+        <p className="text-blue-600 mt-2">✅ Có thể thu hoạch!</p>
+      ) : (
+        <p className="text-gray-500 mt-2">
+          🕒 Đẻ tiếp sau: {nextEggIn > 0 ? `${nextEggIn}h` : "đã đủ giờ"}
+        </p>
+      )}
+
+      <div className="flex gap-2 mt-4">
+        <button
+          onClick={onFeed}
+          className="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded-xl text-sm"
+        >
+          🍽️ Cho ăn
+        </button>
+        <button
+          onClick={onCollect}
+          disabled={!canLay}
+          className={`px-3 py-1 rounded-xl text-sm ${
+            canLay
+              ? "bg-green-500 hover:bg-green-600 text-white"
+              : "bg-gray-300 text-gray-500 cursor-not-allowed"
+          }`}
+        >
+          🥚 Thu trứng
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default ChickenCard;
 
