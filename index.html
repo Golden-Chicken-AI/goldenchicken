@@ -5,45 +5,68 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Golden Chicken Farm</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="Style.css">
 </head>
 <body>
-  <div class="farm-background">
+  <div class="farm-container">
     <header>
-      <h1>Golden Chicken Farm</h1>
-      <div id="store-icon">🛒</div>
+      <h1>Trại Gà Vàng</h1>
     </header>
 
     <main>
-      <section class="coop-container">
-        <!-- 10 ổ gà tầng 1 -->
-        <div class="coop-grid">
-          <!-- Các ổ gà sẽ được thêm bằng JavaScript -->
+      <section class="coop-row">
+        <!-- 10 ô chuồng gà -->
+        <div class="coop" onclick="openChickenInfo(1)">
+          <img src="/images/chicken1.png" alt="Gà 1">
+        </div>
+        <div class="coop" onclick="openChickenInfo(2)">
+          <img src="/images/chicken2.png" alt="Gà 2">
+        </div>
+        <div class="coop" onclick="openChickenInfo(3)">
+          <img src="/images/chicken3.png" alt="Gà 3">
+        </div>
+        <div class="coop" onclick="openChickenInfo(4)">
+          <img src="/images/chicken4.png" alt="Gà 4">
+        </div>
+        <div class="coop" onclick="openChickenInfo(5)">
+          <img src="/images/chicken5.png" alt="Gà 5">
+        </div>
+        <div class="coop" onclick="openChickenInfo(6)">
+          <img src="/images/chicken6.png" alt="Gà 6">
+        </div>
+        <div class="coop" onclick="openChickenInfo(7)">
+          <img src="/images/chicken7.png" alt="Gà 7">
+        </div>
+        <div class="coop" onclick="openChickenInfo(8)">
+          <img src="/images/chicken8.png" alt="Gà 8">
+        </div>
+        <div class="coop" onclick="openChickenInfo(9)">
+          <img src="/images/chicken9.png" alt="Gà 9">
+        </div>
+        <div class="coop" onclick="openChickenInfo(10)">
+          <img src="/images/chicken10.png" alt="Gà 10">
         </div>
       </section>
 
-      <aside class="info-panel">
-        <h2>Thông tin gà</h2>
-        <p><strong>ID:</strong> <span id="chicken-id">--</span></p>
-        <p><strong>Trạng thái:</strong> <span id="chicken-status">--</span></p>
-        <p><strong>Sức khỏe:</strong> <span id="chicken-health">--</span></p>
-        <p><strong>Thời gian trưởng thành:</strong> <span id="chicken-grow">--</span></p>
-        <p><strong>Thời gian đẻ trứng:</strong> <span id="chicken-egg">--</span></p>
-      </aside>
-
-      <div id="store-panel" class="hidden">
-        <h2>Cửa hàng</h2>
-        <ul>
-          <li>Thức ăn thường</li>
-          <li>Thức ăn tăng trưởng -6h</li>
-          <li>Thức ăn tăng trưởng -12h</li>
-          <li>Thức ăn giảm thời gian đẻ -4h</li>
-          <li>Thuốc hồi sức +50</li>
-        </ul>
+      <!-- Cửa hàng -->
+      <div class="shop-icon" onclick="toggleShop()">
+        🛒
       </div>
     </main>
-  </div>
 
+    <!-- Bảng thông tin gà -->
+    <div class="chicken-info" id="chickenInfo">
+      <span class="close" onclick="closeChickenInfo()">&times;</span>
+      <div id="chickenDetails">Thông tin gà ở đây...</div>
+    </div>
+
+    <!-- Cửa hàng popup -->
+    <div class="shop-popup" id="shopPopup">
+      <span class="close" onclick="toggleShop()">&times;</span>
+      <h2>Cửa Hàng</h2>
+      <p>Đang cập nhật vật phẩm...</p>
+    </div>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
