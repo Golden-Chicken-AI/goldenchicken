@@ -1,16 +1,24 @@
-
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gà Trứng Vàng</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Golden Chicken</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <h1>Gà Trứng Vàng</h1>
-  <div id="status"></div>
-  <button onclick="feedChicken()">Cho gà ăn</button>
-  <script src="script.js"></script>
+  <h1>🐔 Golden Chicken Farm</h1>
+  <div id="chicken-status"></div>
+  <div>
+    <button onclick="feedChicken()">🍚 Cho ăn</button>
+    <button onclick="collectEgg()">🥚 Thu trứng</button>
+  </div>
+  <div id="shop">
+    <h2>🛒 Cửa hàng</h2>
+    <button onclick="buyItem('thuong')">Mua Thức ăn thường</button>
+    <button onclick="buyItem('tangtoc6')">Mua Thức ăn tăng tốc 6h</button>
+  </div>
+  <script src="js/data.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>
