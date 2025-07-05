@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Golden Chicken Farm</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="farm">
+    <div id="chicken-count" onclick="toggleChickenInfo()">🐔 0</div>
+    <div id="icons">
+      <button onclick="showTasks()">📋 Nhiệm vụ</button>
+      <button onclick="showSpin()">🎁 Vòng quay</button>
+      <button onclick="showLeaderboard()">🏆 Xếp hạng</button>
+      <button onclick="openStore()">🛒 Cửa hàng</button>
+      <button onclick="openInventory()">📦 Kho đồ</button>
+    </div>
+    <div id="chicken-info" class="modal hidden"></div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="store.js"></script>
+  <script src="tasks.js"></script>
+  <script src="utils.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
