@@ -27,13 +27,18 @@
       height: auto;
       cursor: pointer;
     }
-    .icons-left {
+    .icons-left, .icons-right {
       position: absolute;
-      top: 20%;
-      left: 20px;
+      top: 15%;
       display: flex;
       flex-direction: column;
       gap: 20px;
+    }
+    .icons-left {
+      left: 20px;
+    }
+    .icons-right {
+      right: 20px;
     }
     .icon {
       width: 60px;
@@ -59,7 +64,15 @@
       <div class="icon" title="Cửa hàng">🛒</div>
       <div class="icon" title="Nhiệm vụ">📋</div>
       <div class="icon" title="Bảng xếp hạng">🏆</div>
+      <div class="icon" title="Vòng quay may mắn">🎰</div>
     </div>
+
+    <div class="icons-right">
+      <div class="icon" title="Thuê công nhân">👷</div>
+      <div class="icon" title="Thu trứng">🥚</div>
+      <div class="icon" title="Cho ăn">🍽️</div>
+    </div>
+
     <img class="chicken" src="https://i.imgur.com/Lg7V0r1.png" alt="Gà trên ổ rơm">
   </div>
 </body>
