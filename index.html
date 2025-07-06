@@ -55,6 +55,45 @@
     .icon:hover {
       background-color: #ffe07d;
     }
+
+    /* Popup nhiệm vụ */
+    .popup {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      display: none;
+      z-index: 10;
+    }
+    .popup h2 {
+      margin-top: 0;
+      font-size: 20px;
+    }
+    .popup ul {
+      padding-left: 20px;
+    }
+    .popup ul li {
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+    .popup .weekly {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    .close-btn {
+      margin-top: 10px;
+      background: #ffe07d;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -62,9 +101,9 @@
     <div class="icons-left">
       <div class="icon" title="Trang trại">🏡</div>
       <div class="icon" title="Cửa hàng">🛒</div>
-      <div class="icon" title="Nhiệm vụ">📋</div>
+      <div class="icon" title="Nhiệm vụ" onclick="toggleQuestPopup()">📅</div>
       <div class="icon" title="Bảng xếp hạng">🏆</div>
-      <div class="icon" title="Vòng quay may mắn">🎡</div>
+      <div class="icon" title="Vòng quay may mắn">🎯</div>
     </div>
 
     <div class="icons-right">
@@ -74,6 +113,32 @@
     </div>
 
     <img class="chicken" src="https://i.imgur.com/Lg7V0r1.png" alt="Gà trên ổ rơm">
+
+    <!-- Popup nhiệm vụ -->
+    <div id="quest-popup" class="popup">
+      <h2>📅 NHIỆM VỤ</h2>
+      <ul>
+        <li>✅ Đăng nhập</li>
+        <li>🌾 Cho ăn 1 bữa</li>
+        <li>🌾 Cho ăn 2 bữa</li>
+        <li>🥚 Thu hoạch trứng</li>
+        <li>💊 Dùng thuốc 1 lần</li>
+      </ul>
+      <p>🎁 Phần thưởng: thuốc tăng trưởng 5p, 10p, 15p</p>
+      <p class="weekly">📆 Hằng tuần:<br>✔️ Điểm danh đủ 7 ngày → quay Vòng quay may mắn 🎯</p>
+      <button class="close-btn" onclick="toggleQuestPopup()">Đóng</button>
+    </div>
+  </div>
+
+  <script>
+    function toggleQuestPopup() {
+      const popup = document.getElementById('quest-popup');
+      popup.style.display = (popup.style.display === 'none' || popup.style.display === '') ? 'block' : 'none';
+    }
+  </script>
+</body>
+</html>
+"https://i.imgur.com/Lg7V0r1.png" alt="Gà trên ổ rơm">
   </div>
 </body>
 </html>
