@@ -269,7 +269,29 @@
   function spinWheel() {
     alert("Đang quay... (bạn có thể thêm hiệu ứng ở đây)");
   }
-</script>
+ <!-- Popup bảng xếp hạng -->
+  <div class="popup" id="leaderboard" style="display:none">
+    <h2>📊 Xếp hạng <span onclick="togglePopup('leaderboard')" style="cursor:pointer;color:red;">Đóng</span></h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Người chơi</th><th>🐔</th><th>🥚</th><th>💰</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Người chơi A</td><td>15</td><td>240</td><td>30$</td></tr>
+        <tr><td>Người chơi B</td><td>10</td><td>180</td><td>22$</td></tr>
+        <tr><td>Người chơi C</td><td>8</td><td>140</td><td>18$</td></tr>
+      </tbody>
+    </table>
+  </div>
 
+  <script>
+    function togglePopup(id) {
+      const el = document.getElementById(id);
+      el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    }
+  </script>
 </body>
 </html>
+
