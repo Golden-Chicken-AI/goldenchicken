@@ -71,15 +71,17 @@
     }
 
     .task-table {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 320px;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 340px;
       background: #fff3e0;
       border: 2px solid #ffb300;
       border-radius: 15px;
       padding: 20px;
-      z-index: 10;
+      z-index: 1000;
+      display: none;
     }
 
     .task-table h2 {
@@ -115,6 +117,19 @@
     .claim-button:disabled {
       background-color: #c8e6c9;
       cursor: default;
+    }
+
+    .close-task {
+      margin-top: 10px;
+      display: block;
+      background: #e0e0e0;
+      color: #333;
+      font-size: 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      padding: 6px 12px;
+      float: right;
     }
 
     .wheel-container {
@@ -194,7 +209,7 @@
   <div class="icon-bar-left">
     <div class="icon-btn" title="Trang trại"><img src="https://cdn-icons-png.flaticon.com/512/188/188987.png"></div>
     <div class="icon-btn" title="Cửa hàng"><img src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png"></div>
-    <div class="icon-btn" title="Nhiệm vụ"><img src="https://cdn-icons-png.flaticon.com/512/1827/1827359.png"></div>
+    <div class="icon-btn" title="Nhiệm vụ" onclick="showTasks()"><img src="https://cdn-icons-png.flaticon.com/512/1827/1827359.png"></div>
     <div class="icon-btn" title="Bảng xếp hạng"><img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png"></div>
     <div class="icon-btn" title="Vòng quay" onclick="showWheel()"><img src="https://cdn-icons-png.flaticon.com/512/1048/1048927.png"></div>
   </div>
@@ -206,7 +221,7 @@
   </div>
 </div>
 
-<div class="task-table">
+<div class="task-table" id="taskPopup">
   <h2>🗓️ Nhiệm vụ ngày</h2>
   <table>
     <tr><th>Nhiệm vụ</th><th>Phần thưởng</th><th></th></tr>
@@ -225,6 +240,7 @@
       <td><button class="claim-button" onclick="showWheel()">Nhận</button></td>
     </tr>
   </table>
+  <button class="close-task" onclick="closeTasks()">Đóng</button>
 </div>
 
 <div class="wheel-container" id="wheelContainer">
@@ -240,6 +256,14 @@
 
   function closeWheel() {
     document.getElementById('wheelContainer').style.display = 'none';
+  }
+
+  function showTasks() {
+    document.getElementById('taskPopup').style.display = 'block';
+  }
+
+  function closeTasks() {
+    document.getElementById('taskPopup').style.display = 'none';
   }
 
   function spinWheel() {
