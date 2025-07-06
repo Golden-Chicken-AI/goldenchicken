@@ -1,275 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Golden Chicken Farm</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #fff8e1;
       margin: 0;
       padding: 0;
-      overflow-x: hidden;
+      background-color: #d9f99d;
+      font-family: sans-serif;
     }
-
-    .container {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .chicken {
-      position: absolute;
-      width: 150px;
-      bottom: 120px;
-      z-index: 1;
-    }
-
-    .nest {
-      position: absolute;
-      width: 200px;
-      bottom: 80px;
-      z-index: 0;
-    }
-
-    .icon-bar-left, .icon-bar-right {
+    .center-chicken {
       position: absolute;
       top: 50%;
-      transform: translateY(-50%);
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .icon-panel {
+      position: absolute;
+      top: 10px;
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 10px;
     }
-
-    .icon-bar-left {
-      left: 20px;
-    }
-
-    .icon-bar-right {
-      right: 20px;
-    }
-
-    .icon-btn {
-      width: 50px;
-      height: 50px;
-      background-color: #ffcc80;
+    .left-panel { left: 10px; }
+    .right-panel { right: 10px; }
+    .icon-button {
+      background: white;
       border-radius: 50%;
-      border: 2px solid #ffb300;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      padding: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
       cursor: pointer;
     }
-
-    .icon-btn img {
-      width: 30px;
-      height: 30px;
-    }
-
-    .task-table {
+    .popup {
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 340px;
-      background: #fff3e0;
-      border: 2px solid #ffb300;
-      border-radius: 15px;
+      background: white;
       padding: 20px;
-      z-index: 1000;
-      display: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      z-index: 10;
+      width: 300px;
     }
-
-    .task-table h2 {
-      text-align: center;
-      color: #e65100;
+    .popup h2 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-
-    table {
+    .popup table {
       width: 100%;
       border-collapse: collapse;
+      font-size: 14px;
     }
-
-    th, td {
-      padding: 6px;
+    .popup th, .popup td {
+      padding: 5px;
+      border-bottom: 1px solid #ccc;
       text-align: left;
-      border-bottom: 1px solid #ffd54f;
     }
-
-    .reward-icon {
-      width: 24px;
-      height: 24px;
-    }
-
-    .claim-button {
-      padding: 5px 10px;
-      background-color: #81c784;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .claim-button:disabled {
-      background-color: #c8e6c9;
-      cursor: default;
-    }
-
-    .close-task {
-      margin-top: 10px;
+    #wheelCanvas {
       display: block;
-      background: #e0e0e0;
-      color: #333;
-      font-size: 14px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      padding: 6px 12px;
-      float: right;
-    }
-
-    .wheel-container {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      background: rgba(255, 255, 255, 0.95);
-      padding: 20px;
-      border: 4px solid #f57f17;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
-      z-index: 999;
-    }
-
-    .wheel {
-      width: 300px;
-      height: 300px;
+      margin: 10px auto;
+      background: #facc15;
       border-radius: 50%;
-      border: 10px solid #ff6f00;
-      background: conic-gradient(
-        #ffe082 0% 20%, 
-        #ffcc80 20% 30%, 
-        #ffd54f 30% 45%, 
-        #ffe082 45% 65%, 
-        #ffb74d 65% 75%, 
-        #ffe082 75% 80%, 
-        #fff 80% 100%
-      );
-      position: relative;
+      border: 6px solid #eab308;
     }
-
-    .wheel::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 20px;
-      height: 20px;
-      background: red;
-      border-radius: 50%;
-    }
-
-    .wheel-button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: #ff6f00;
+    .btn-spin {
+      background: #ef4444;
       color: white;
-      font-size: 16px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-
-    .close-wheel {
-      margin-top: 10px;
-      padding: 5px 10px;
-      background: #e0e0e0;
-      color: #333;
-      font-size: 14px;
+      padding: 10px 20px;
       border: none;
       border-radius: 6px;
       cursor: pointer;
+      display: block;
+      margin: 10px auto 0;
     }
   </style>
 </head>
 <body>
-
-<div class="container">
-  <img src="https://i.imgur.com/C3pN6Gi.png" alt="Chicken" class="chicken">
-  <img src="https://i.imgur.com/HXfZXWk.png" alt="Nest" class="nest">
-
-  <div class="icon-bar-left">
-    <div class="icon-btn" title="Trang trại"><img src="https://cdn-icons-png.flaticon.com/512/188/188987.png"></div>
-    <div class="icon-btn" title="Cửa hàng"><img src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png"></div>
-    <div class="icon-btn" title="Nhiệm vụ" onclick="showTasks()"><img src="https://cdn-icons-png.flaticon.com/512/1827/1827359.png"></div>
-    <div class="icon-btn" title="Bảng xếp hạng"><img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png"></div>
-    <div class="icon-btn" title="Vòng quay" onclick="showWheel()"><img src="https://cdn-icons-png.flaticon.com/512/1048/1048927.png"></div>
+  <div class="center-chicken">
+    <img src="https://i.imgur.com/Wrm0ayZ.png" alt="Chicken" width="160" height="160" />
+    <div>Gà đang ngồi ổ</div>
   </div>
 
-  <div class="icon-bar-right">
-    <div class="icon-btn" title="Thuê công nhân"><img src="https://cdn-icons-png.flaticon.com/512/921/921347.png"></div>
-    <div class="icon-btn" title="Thu hoạch trứng"><img src="https://cdn-icons-png.flaticon.com/512/685/685352.png"></div>
-    <div class="icon-btn" title="Cho ăn"><img src="https://cdn-icons-png.flaticon.com/512/2718/2718224.png"></div>
+  <!-- Icon trái -->
+  <div class="icon-panel left-panel">
+    <div class="icon-button" onclick="togglePopup('missions')">📋</div>
+    <div class="icon-button">🏠</div>
+    <div class="icon-button">🛒</div>
+    <div class="icon-button" onclick="togglePopup('leaderboard')">📊</div>
+    <div class="icon-button" onclick="togglePopup('wheel')">🎡</div>
   </div>
-</div>
 
-<div class="task-table" id="taskPopup">
-  <h2>🗓️ Nhiệm vụ ngày</h2>
-  <table>
-    <tr><th>Nhiệm vụ</th><th>Phần thưởng</th><th></th></tr>
-    <tr><td>Đăng nhập</td><td><img src="https://cdn-icons-png.flaticon.com/512/3103/3103451.png" class="reward-icon"></td><td><button class="claim-button">Nhận</button></td></tr>
-    <tr><td>Cho ăn 1 bữa</td><td><img src="https://cdn-icons-png.flaticon.com/512/3103/3103451.png" class="reward-icon"></td><td><button class="claim-button">Nhận</button></td></tr>
-    <tr><td>Cho ăn 2 bữa</td><td><img src="https://cdn-icons-png.flaticon.com/512/3103/3103451.png" class="reward-icon"></td><td><button class="claim-button">Nhận</button></td></tr>
-    <tr><td>Thu hoạch trứng</td><td><img src="https://cdn-icons-png.flaticon.com/512/3103/3103451.png" class="reward-icon"></td><td><button class="claim-button">Nhận</button></td></tr>
-    <tr><td>Dùng thuốc hồi sức</td><td><img src="https://cdn-icons-png.flaticon.com/512/3103/3103451.png" class="reward-icon"></td><td><button class="claim-button">Nhận</button></td></tr>
-  </table>
+  <!-- Icon phải -->
+  <div class="icon-panel right-panel">
+    <div class="icon-button">👷</div>
+    <div class="icon-button">🥚</div>
+    <div class="icon-button">🍗</div>
+  </div>
 
-  <h2>📅 Nhiệm vụ tuần</h2>
-  <table>
-    <tr>
-      <td>Điểm danh 7 ngày</td>
-      <td><img src="https://cdn-icons-png.flaticon.com/512/1048/1048927.png" class="reward-icon"></td>
-      <td><button class="claim-button" onclick="showWheel()">Nhận</button></td>
-    </tr>
-  </table>
-  <button class="close-task" onclick="closeTasks()">Đóng</button>
-</div>
+  <!-- Popup nhiệm vụ -->
+  <div class="popup" id="missions" style="display:none">
+    <h2>📅 Nhiệm vụ <span onclick="togglePopup('missions')" style="cursor:pointer;color:red;">Đóng</span></h2>
+    <b>🗓️ Nhiệm vụ ngày:</b>
+    <ul>
+      <li>Đăng nhập - ⚡ +5p</li>
+      <li>Cho ăn 1 bữa - ⚡ +5p</li>
+      <li>Cho ăn 2 bữa - ⚡ +10p</li>
+      <li>Thu hoạch trứng - ⚡ +15p</li>
+      <li>Dùng thuốc hồi sức - ⭐ +1</li>
+    </ul>
+    <b>📆 Nhiệm vụ tuần:</b>
+    <p>Điểm danh 7 ngày → 🎡 1 lượt quay</p>
+  </div>
 
-<div class="wheel-container" id="wheelContainer">
-  <div class="wheel"></div>
-  <button class="wheel-button" onclick="spinWheel()">Quay ngay 🎯</button>
-  <button class="close-wheel" onclick="closeWheel()">Đóng</button>
-</div>
-
-<script>
-  function showWheel() {
-    document.getElementById('wheelContainer').style.display = 'flex';
-  }
-
-  function closeWheel() {
-    document.getElementById('wheelContainer').style.display = 'none';
-  }
-
-  function showTasks() {
-    document.getElementById('taskPopup').style.display = 'block';
-  }
-
-  function closeTasks() {
-    document.getElementById('taskPopup').style.display = 'none';
-  }
-
-  function spinWheel() {
-    alert("Đang quay... (bạn có thể thêm hiệu ứng ở đây)");
-  }
- <!-- Popup bảng xếp hạng -->
+  <!-- Popup bảng xếp hạng -->
   <div class="popup" id="leaderboard" style="display:none">
     <h2>📊 Xếp hạng <span onclick="togglePopup('leaderboard')" style="cursor:pointer;color:red;">Đóng</span></h2>
     <table>
@@ -286,12 +136,64 @@
     </table>
   </div>
 
+  <!-- Popup vòng quay may mắn -->
+  <div class="popup" id="wheel" style="display:none">
+    <h2>🎡 Vòng quay <span onclick="togglePopup('wheel')" style="cursor:pointer;color:red;">Đóng</span></h2>
+    <canvas id="wheelCanvas" width="250" height="250"></canvas>
+    <button class="btn-spin" onclick="spinWheel()">Quay!</button>
+  </div>
+
   <script>
     function togglePopup(id) {
       const el = document.getElementById(id);
       el.style.display = el.style.display === 'none' ? 'block' : 'none';
     }
+
+    // Vòng quay may mắn
+    const canvas = document.getElementById("wheelCanvas");
+    const ctx = canvas.getContext("2d");
+    const options = ["🍗 x2", "⚡ 30p", "💊 1", "⭐ 10 VIP", "⚡ 1h", "$1", "🚫"];
+    let startAngle = 0;
+    let arc = Math.PI * 2 / options.length;
+    let spinAngle = 0;
+    let spinning = false;
+
+    function drawWheel() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      options.forEach((label, i) => {
+        const angle = startAngle + i * arc;
+        ctx.beginPath();
+        ctx.fillStyle = i % 2 === 0 ? "#fde68a" : "#fcd34d";
+        ctx.moveTo(125, 125);
+        ctx.arc(125, 125, 120, angle, angle + arc);
+        ctx.fill();
+        ctx.save();
+        ctx.translate(125, 125);
+        ctx.rotate(angle + arc / 2);
+        ctx.fillStyle = "#000";
+        ctx.font = "14px sans-serif";
+        ctx.fillText(label, 60, 0);
+        ctx.restore();
+      });
+    }
+
+    function spinWheel() {
+      if (spinning) return;
+      spinning = true;
+      let spin = 0;
+      const totalSpin = Math.random() * 2000 + 3000;
+      const interval = setInterval(() => {
+        spin += 30;
+        startAngle += (Math.PI / 180) * 10;
+        drawWheel();
+        if (spin >= totalSpin) {
+          clearInterval(interval);
+          spinning = false;
+        }
+      }, 16);
+    }
+
+    drawWheel();
   </script>
 </body>
 </html>
-
