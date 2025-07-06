@@ -10,9 +10,111 @@
       background: #fff8e1;
       margin: 0;
       padding: 0;
+      overflow-x: hidden;
+    }
+
+    .container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .chicken {
+      position: absolute;
+      width: 150px;
+      bottom: 120px;
+      z-index: 1;
+    }
+
+    .nest {
+      position: absolute;
+      width: 200px;
+      bottom: 80px;
+      z-index: 0;
+    }
+
+    .icon-bar-left, .icon-bar-right {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
       display: flex;
       flex-direction: column;
+      gap: 15px;
+    }
+
+    .icon-bar-left {
+      left: 20px;
+    }
+
+    .icon-bar-right {
+      right: 20px;
+    }
+
+    .icon-btn {
+      width: 50px;
+      height: 50px;
+      background-color: #ffcc80;
+      border-radius: 50%;
+      border: 2px solid #ffb300;
+      display: flex;
+      justify-content: center;
       align-items: center;
+      cursor: pointer;
+    }
+
+    .icon-btn img {
+      width: 30px;
+      height: 30px;
+    }
+
+    .task-table {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 320px;
+      background: #fff3e0;
+      border: 2px solid #ffb300;
+      border-radius: 15px;
+      padding: 20px;
+      z-index: 10;
+    }
+
+    .task-table h2 {
+      text-align: center;
+      color: #e65100;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 6px;
+      text-align: left;
+      border-bottom: 1px solid #ffd54f;
+    }
+
+    .reward-icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    .claim-button {
+      padding: 5px 10px;
+      background-color: #81c784;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .claim-button:disabled {
+      background-color: #c8e6c9;
+      cursor: default;
     }
 
     .wheel-container {
@@ -36,8 +138,6 @@
       height: 300px;
       border-radius: 50%;
       border: 10px solid #ff6f00;
-      position: relative;
-      overflow: hidden;
       background: conic-gradient(
         #ffe082 0% 20%, 
         #ffcc80 20% 30%, 
@@ -47,6 +147,7 @@
         #ffe082 75% 80%, 
         #fff 80% 100%
       );
+      position: relative;
     }
 
     .wheel::after {
@@ -82,95 +183,45 @@
       border-radius: 6px;
       cursor: pointer;
     }
-
-    .task-table {
-      margin-top: 40px;
-      width: 90%;
-      max-width: 500px;
-      background: #fff3e0;
-      border: 2px solid #ffb300;
-      border-radius: 15px;
-      padding: 20px;
-    }
-
-    .task-table h2 {
-      text-align: center;
-      color: #e65100;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    th, td {
-      padding: 8px;
-      text-align: left;
-      border-bottom: 1px solid #ffd54f;
-    }
-
-    .reward-icon {
-      width: 24px;
-      height: 24px;
-    }
-
-    .claim-button {
-      padding: 5px 10px;
-      background-color: #81c784;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .claim-button:disabled {
-      background-color: #c8e6c9;
-      cursor: default;
-    }
   </style>
 </head>
 <body>
 
+<div class="container">
+  <img src="https://i.imgur.com/C3pN6Gi.png" alt="Chicken" class="chicken">
+  <img src="https://i.imgur.com/HXfZXWk.png" alt="Nest" class="nest">
+
+  <div class="icon-bar-left">
+    <div class="icon-btn" title="Trang trại"><img src="https://cdn-icons-png.flaticon.com/512/188/188987.png"></div>
+    <div class="icon-btn" title="Cửa hàng"><img src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png"></div>
+    <div class="icon-btn" title="Nhiệm vụ"><img src="https://cdn-icons-png.flaticon.com/512/1827/1827359.png"></div>
+    <div class="icon-btn" title="Bảng xếp hạng"><img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png"></div>
+    <div class="icon-btn" title="Vòng quay" onclick="showWheel()"><img src="https://cdn-icons-png.flaticon.com/512/1048/1048927.png"></div>
+  </div>
+
+  <div class="icon-bar-right">
+    <div class="icon-btn" title="Thuê công nhân"><img src="https://cdn-icons-png.flaticon.com/512/921/921347.png"></div>
+    <div class="icon-btn" title="Thu hoạch trứng"><img src="https://cdn-icons-png.flaticon.com/512/685/685352.png"></div>
+    <div class="icon-btn" title="Cho ăn"><img src="https://cdn-icons-png.flaticon.com/512/2718/2718224.png"></div>
+  </div>
+</div>
+
 <div class="task-table">
   <h2>🗓️ Nhiệm vụ ngày</h2>
   <table>
-    <tr>
-      <th>Nhiệm vụ</th>
-      <th>Phần thưởng</th>
-      <th></th>
-    </tr>
-    <tr>
-      <td>Đăng nhập</td>
-      <td><img src="https://cdn-icons-png.flaticon.com/512/3103/3103451.png" class="reward-icon" alt="tăng tốc"></td>
-      <td><button class="claim-button">Nhận</button></td>
-    </tr>
-    <tr>
-      <td>Cho ăn 1 bữa</td>
-      <td><img src="https://cdn-icons-png.flaticon.com/512/3103/3103451.png" class="reward-icon" alt="tăng tốc"></td>
-      <td><button class="claim-button">Nhận</button></td>
-    </tr>
-    <tr>
-      <td>Cho ăn 2 bữa</td>
-      <td><img src="https://cdn-icons-png.flaticon.com/512/3103/3103451.png" class="reward-icon" alt="tăng tốc"></td>
-      <td><button class="claim-button">Nhận</button></td>
-    </tr>
-    <tr>
-      <td>Thu hoạch trứng</td>
-      <td><img src="https://cdn-icons-png.flaticon.com/512/3103/3103451.png" class="reward-icon" alt="tăng tốc"></td>
-      <td><button class="claim-button">Nhận</button></td>
-    </tr>
-    <tr>
-      <td>Dùng thuốc hồi sức</td>
-      <td><img src="https://cdn-icons-png.flaticon.com/512/3103/3103451.png" class="reward-icon" alt="tăng tốc"></td>
-      <td><button class="claim-button">Nhận</button></td>
-    </tr>
+    <tr><th>Nhiệm vụ</th><th>Phần thưởng</th><th></th></tr>
+    <tr><td>Đăng nhập</td><td><img src="https://cdn-icons-png.flaticon.com/512/3103/3103451.png" class="reward-icon"></td><td><button class="claim-button">Nhận</button></td></tr>
+    <tr><td>Cho ăn 1 bữa</td><td><img src="https://cdn-icons-png.flaticon.com/512/3103/3103451.png" class="reward-icon"></td><td><button class="claim-button">Nhận</button></td></tr>
+    <tr><td>Cho ăn 2 bữa</td><td><img src="https://cdn-icons-png.flaticon.com/512/3103/3103451.png" class="reward-icon"></td><td><button class="claim-button">Nhận</button></td></tr>
+    <tr><td>Thu hoạch trứng</td><td><img src="https://cdn-icons-png.flaticon.com/512/3103/3103451.png" class="reward-icon"></td><td><button class="claim-button">Nhận</button></td></tr>
+    <tr><td>Dùng thuốc hồi sức</td><td><img src="https://cdn-icons-png.flaticon.com/512/3103/3103451.png" class="reward-icon"></td><td><button class="claim-button">Nhận</button></td></tr>
   </table>
 
   <h2>📅 Nhiệm vụ tuần</h2>
   <table>
     <tr>
       <td>Điểm danh 7 ngày</td>
-      <td><img src="https://cdn-icons-png.flaticon.com/512/1048/1048927.png" class="reward-icon" alt="vòng quay"></td>
+      <td><img src="https://cdn-icons-png.flaticon.com/512/1048/1048927.png" class="reward-icon"></td>
       <td><button class="claim-button" onclick="showWheel()">Nhận</button></td>
     </tr>
   </table>
@@ -198,4 +249,3 @@
 
 </body>
 </html>
-
