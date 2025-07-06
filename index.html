@@ -112,6 +112,54 @@
       font-size: 18px;
       margin-right: 4px;
     }
+
+    /* Vòng quay may mắn */
+    #wheel-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      z-index: 20;
+    }
+    #wheel {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      border: 8px solid #ffd966;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+      transform: rotate(0deg);
+      transition: transform 4s ease-out;
+    }
+    .segment {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      transform-origin: 100% 100%;
+      background: #fff6d6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 13px;
+      font-weight: bold;
+      text-align: center;
+      box-sizing: border-box;
+      padding: 5px;
+    }
+    #spin-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -121,7 +169,7 @@
       <div class="icon" title="Cửa hàng">🛒</div>
       <div class="icon" title="Nhiệm vụ" onclick="toggleQuestPopup()">📅</div>
       <div class="icon" title="Bảng xếp hạng">🏆</div>
-      <div class="icon" title="Vòng quay may mắn">🎯</div>
+      <div class="icon" title="Vòng quay may mắn" onclick="toggleWheel()">🎯</div>
     </div>
 
     <div class="icons-right">
@@ -152,6 +200,11 @@
 
       <button class="close-btn" onclick="toggleQuestPopup()">Đóng</button>
     </div>
+
+    <div id="wheel-container">
+      <div id="wheel"></div>
+      <button id="spin-btn" onclick="spinWheel()">Quay ngay 🎯</button>
+    </div>
   </div>
 
   <script>
@@ -172,19 +225,56 @@
     function claimWeekly() {
       const button = document.getElementById('weekly-btn');
       if (button.classList.contains('active')) {
-        alert('🎯 Chuyển đến vòng quay may mắn!');
+        toggleWheel();
         button.disabled = true;
         button.classList.remove('active');
         button.textContent = 'Đã nhận';
       }
     }
 
-    // Giả lập hoàn thành nhiệm vụ (kích hoạt tất cả các nút sau 1 giây)
+    function toggleWheel() {
+      const wheelBox = document.getElementById('wheel-container');
+      wheelBox.style.display = (wheelBox.style.display === 'none' || wheelBox.style.display === '') ? 'flex' : 'none';
+    }
+
+    const wheel = document.getElementById('wheel');
+    const prizes = [
+      "2 suất thức ăn thường",
+      "Thuốc tăng trưởng 30p",
+      "1 thuốc hồi sức",
+      "10 điểm VIP",
+      "Thuốc tăng trưởng 1h",
+      "1$",
+      "Không trúng gì"
+    ];
+
+    const colors = ["#fff6d6", "#ffe07d"];
+    let angle = 0;
+
+    function createWheel() {
+      const segmentAngle = 360 / prizes.length;
+      prizes.forEach((prize, i) => {
+        const segment = document.createElement('div');
+        segment.className = 'segment';
+        segment.style.transform = `rotate(${i * segmentAngle}deg) skewY(-${90 - segmentAngle}deg)`;
+        segment.style.background = colors[i % 2];
+        segment.innerHTML = prize;
+        wheel.appendChild(segment);
+      });
+    }
+
+    function spinWheel() {
+      const rotateBy = 360 * 5 + Math.floor(Math.random() * 360);
+      angle += rotateBy;
+      wheel.style.transform = `rotate(${angle}deg)`;
+    }
+
     window.onload = () => {
       setTimeout(() => {
         document.querySelectorAll('.reward-btn').forEach(btn => {
           btn.classList.add('active');
         });
+        createWheel();
       }, 1000);
     };
   </script>
