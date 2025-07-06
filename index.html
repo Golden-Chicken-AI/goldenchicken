@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Golden Chicken Farm</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f4e7c5;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+    #game-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+    .chicken {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 180px;
+      height: auto;
+      cursor: pointer;
+    }
+    .icons-left {
+      position: absolute;
+      top: 20%;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .icon {
+      width: 60px;
+      height: 60px;
+      background-color: #fff6d6;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-size: 28px;
+    }
+    .icon:hover {
+      background-color: #ffe07d;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <div class="icons-left">
+      <div class="icon" title="Trang trại">🏡</div>
+      <div class="icon" title="Cửa hàng">🛒</div>
+      <div class="icon" title="Nhiệm vụ">📋</div>
+      <div class="icon" title="Bảng xếp hạng">🏆</div>
+    </div>
+    <img class="chicken" src="https://i.imgur.com/Lg7V0r1.png" alt="Gà trên ổ rơm">
+  </div>
+</body>
+</html>
